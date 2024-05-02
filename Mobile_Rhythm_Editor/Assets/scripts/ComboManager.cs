@@ -2,25 +2,24 @@ using UnityEngine;
 using TMPro; // TextMesh Pro 네임스페이스 추가
 public class ComboManager : MonoBehaviour
 {
-     public static ComboManager Instance { get; private set; } // 싱글톤 인스턴스
-
+    public static ComboManager Instance { get; private set;}
     public TextMeshProUGUI comboText; // 점수를 표시할 TextMeshProUGUI
 
     private int currentCombo = 0; // 현재 점수
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬이 변경되어도 파괴되지 않음
+            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
     }
-
+    private int currentComboIndex = 0;
     void Start()
     {
         UpdateComboText(); // 시작할 때 점수 텍스트 업데이트
@@ -30,11 +29,12 @@ public class ComboManager : MonoBehaviour
     public void AddCombo(int combo)
     {
         currentCombo += combo;
-        if(combo == 0)
-        {
-            currentCombo = 0;
-        }
         UpdateComboText(); // 점수 텍스트 업데이트
+    }
+    public void ResetCombo()
+    {
+        currentCombo = 0;
+        UpdateComboText();
     }
 
     // 점수 텍스트를 업데이트하는 메서드

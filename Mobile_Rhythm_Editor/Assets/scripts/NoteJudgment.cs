@@ -4,7 +4,6 @@ using System.Linq;
 
 public class NoteJudgment : MonoBehaviour
 {
-    // 각 노트 타입별 판정선을 선언합니다.
     public Transform judgmentLine_Y;
     public Transform judgmentLine_G;
     public Transform judgmentLine_R;
@@ -12,12 +11,12 @@ public class NoteJudgment : MonoBehaviour
     public GameObject effectPrefab_G; 
     public GameObject effectPrefab_R;
 
-    public float perfectThreshold = 0.05f; // Perfect 판정 거리
-    public float greatThreshold = 0.1f; // Great 판정 거리
-    public float goodThreshold = 0.15f; // Good 판정 거리
-    public float missThreshold = 0.2f; // Miss 판정 거리
+    public float perfectThreshold = 0.05f;
+    public float greatThreshold = 0.1f;
+    public float goodThreshold = 0.15f;
+    public float missThreshold = 0.2f;
 
-    private List<GameObject> notesInPlay = new List<GameObject>(); // 활성화된 노트들의 리스트
+    private List<GameObject> notesInPlay = new List<GameObject>();
 
     void Update()
     {
@@ -35,54 +34,37 @@ public class NoteJudgment : MonoBehaviour
 
     void CheckMissedNotes()
     {
-        // 각 노트 타입별로 미스를 체크합니다.
         for (int i = notesInPlay.Count - 1; i >= 0; i--)
         {
             var note = notesInPlay[i];
-            Transform specificJudgmentLine = null;
+            Transform specificJudgmentLine = GetJudgmentLine(note.tag);
 
-            // 노트 타입에 따라 사용할 판정선을 결정합니다.
-            if (note.tag == "Note_Y")
-            {
-                specificJudgmentLine = judgmentLine_Y;
-            }
-            else if (note.tag == "Note_G")
-            {
-                specificJudgmentLine = judgmentLine_G;
-            }
-            else if (note.tag == "Note_R")
-            {
-                specificJudgmentLine = judgmentLine_R;
-            }
-
-            // 지정된 판정선이 있을 경우, 해당 노트가 판정선을 넘었는지 확인합니다.
             if (specificJudgmentLine != null && note.transform.position.y < specificJudgmentLine.position.y - missThreshold)
             {
                 Debug.Log("Miss by distance: " + note.tag);
+                PerformMissAction();
                 Destroy(note);
                 notesInPlay.RemoveAt(i);
             }
         }    
     }
 
-    // 버튼 클릭 이벤트에 의해 호출될 새로운 메소드들입니다.
-    public void JudgeClosestNote_Y()
+    public void JudgeClosestNote_Y() { JudgeClosestNote("Note_Y", judgmentLine_Y); }
+    public void JudgeClosestNote_G() { JudgeClosestNote("Note_G", judgmentLine_G); }
+    public void JudgeClosestNote_R() { JudgeClosestNote("Note_R", judgmentLine_R); }
+
+    private Transform GetJudgmentLine(string noteType)
     {
-        JudgeClosestNote("Note_Y", judgmentLine_Y);
+        switch (noteType)
+        {
+            case "Note_Y": return judgmentLine_Y;
+            case "Note_G": return judgmentLine_G;
+            case "Note_R": return judgmentLine_R;
+            default: return null;
+        }
     }
 
-    public void JudgeClosestNote_G()
-    {
-        JudgeClosestNote("Note_G", judgmentLine_G);
-    }
-
-    public void JudgeClosestNote_R()
-    {
-        JudgeClosestNote("Note_R", judgmentLine_R);
-    }
-
-    // JudgeClosestNote 메소드에 특정 판정선을 매개변수로 받도록 변경합니다.
-    public void JudgeClosestNote(string noteType, Transform specificJudgmentLine)
+    private void JudgeClosestNote(string noteType, Transform specificJudgmentLine)
     {
         var notes = notesInPlay.Where(note => note.tag == noteType).ToList();
         GameObject closestNote = null;
@@ -103,20 +85,19 @@ public class NoteJudgment : MonoBehaviour
             string judgment = DetermineJudgment(minDistance);
             Debug.Log(noteType + " " + judgment);
 
-            // 이펙트 생성 및 0.3초 후 제거
             GameObject effectPrefab = GetEffectPrefab(noteType);
             if (effectPrefab != null)
             {
-                Quaternion rotation = Quaternion.Euler(0, 0, 315);
-                GameObject effect = Instantiate(effectPrefab, specificJudgmentLine.position, rotation);
-                Destroy(effect, 1f);  // 0.3초 후 이펙트 자동 제거
-                Debug.Log("Effect created for " + noteType); 
+                GameObject effect = Instantiate(effectPrefab, specificJudgmentLine.position, Quaternion.Euler(0, 0, 315));
+                Destroy(effect, 1f);
+                Debug.Log("Effect created for " + noteType);
             }
 
             Destroy(closestNote);
             notesInPlay.Remove(closestNote);
         }
     }
+
     private GameObject GetEffectPrefab(string noteType)
     {
         switch (noteType)
@@ -128,28 +109,43 @@ public class NoteJudgment : MonoBehaviour
         }
     }
 
-
     private string DetermineJudgment(float distance)
     {
         if (distance <= perfectThreshold)
         {
-            ScoreManager.Instance.AddScore(100);
-            ComboManager.Instance.AddCombo(1);
+            PerformAction(100, 1, 1);
             return "Perfect";
         }
-        if (distance <= greatThreshold)
+        else if (distance <= greatThreshold)
         {
-            ScoreManager.Instance.AddScore(80);
-            ComboManager.Instance.AddCombo(1);
+            PerformAction(80, 1, 1);
             return "Great";
         }
-        if (distance <= goodThreshold)
+        else if (distance <= goodThreshold)
         {
-            ScoreManager.Instance.AddScore(50);
-            ComboManager.Instance.AddCombo(1);
+            PerformAction(50, 1, 1);
             return "Good";
         }
-        ComboManager.Instance.AddCombo(0);
-        return "Miss";
+        else
+        {
+            return "Miss";
+        }
+    }
+
+    private void PerformAction(int score, int combo, int points)
+    {
+        if (ScoreManager.Instance != null) ScoreManager.Instance.AddScore(score);
+        if (ComboManager.Instance != null) ComboManager.Instance.AddCombo(combo);
+        if (LifeManager.Instance != null) LifeManager.Instance.Plus(points);
+    }
+    private void PerformMissAction()
+    {
+        Debug.Log("Miss Action Triggered"); 
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.AddScore(0); 
+        if (ComboManager.Instance != null)
+            ComboManager.Instance.ResetCombo();  // 콤보 초기화
+        if (LifeManager.Instance != null)
+            LifeManager.Instance.Minus(5);  // 게임 매니저 점수 감소 및 게임 오버 검사
     }
 }

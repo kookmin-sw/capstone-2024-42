@@ -75,8 +75,6 @@ public class RandomMarkers : MonoBehaviour
         Destroy(explosion, 1f); // 1초 후 폭발 효과 제거
 
         ScoreManager.Instance.AddScore(scorePerSuccess); // 점수 추가
-        Debug.Log("Success! Score: " + ScoreManager.Instance.GetCurrentScore());
-
         //countdownText.text = "Success! + " + scorePerSuccess + " points";
 
         accumulatedRotation = 0f; // 누적 회전 초기화

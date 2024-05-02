@@ -3,20 +3,19 @@ using TMPro; // TextMesh Pro 네임스페이스 추가
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance { get; private set; } // 싱글톤 인스턴스
-
+    public static ScoreManager Instance { get; private set; }
     public TextMeshProUGUI scoreText; // 점수를 표시할 TextMeshProUGUI
 
     private int currentScore = 0; // 현재 점수
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬이 변경되어도 파괴되지 않음
+            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
