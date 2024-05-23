@@ -16,7 +16,7 @@
 
 [![Video Label](http://img.youtube.com/vi/DtKIhjOR1kI/0.jpg)](https://youtu.be/DtKIhjOR1kI)
 
-[![Video Label](http://img.youtube.com/vi/DtKIhjOR1kI/0.jpg)](https://youtu.be/DtKIhjOR1kI)
+[![Video Label](http://img.youtube.com/vi/bUpB8MHQ1ys/0.jpg)](https://youtu.be/bUpB8MHQ1ys)
 
 ## 5) 기대효과
 1) 게임 내 RPG적 요소와 멀티 플레이라는 타 리듬게임과의 차별성을 통해 시장 내의 독자적 포지션 구축.
