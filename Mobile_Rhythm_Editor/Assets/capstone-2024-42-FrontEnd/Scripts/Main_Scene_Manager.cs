@@ -18,18 +18,18 @@ public class Main_Scene_Manager : MonoBehaviour
 
     void Start()
     {
-        //Text_user_name.text = User.user.name.ToString();
-        //Text_user_level.text = User.user.level.ToString();
-        //Text_gold.text = User.user.gold.ToString();
-        Image_character.sprite = character_image_sprite[User.user.character];
+        Text_user_name.text = BackendGameData.Instance.UserGameData.nickname;
+        Text_user_level.text = BackendGameData.Instance.UserGameData.level.ToString();
+        Text_gold.text = BackendGameData.Instance.UserGameData.money.ToString();
+        Image_character.sprite = character_image_sprite[BackendGameData.Instance.UserGameData.selectCharacter_num];
 
         // 유저 경험치 바 활성 스크립트
-        int exp = User.user.exp;
+        int exp = BackendGameData.Instance.UserGameData.userExp;
         if (exp == 0) gauge.gameObject.SetActive(false);
         else
         {
             gauge.gameObject.SetActive(true);
-            user_exp_bar.value = (float)exp / (float)BackendChartData.levelChart[User.user.level - 1].maxExperience;
+            user_exp_bar.value = (float)exp / (float)BackendChartData.levelChart[BackendGameData.Instance.UserGameData.level - 1].maxExperience;
         }
     }
 
