@@ -60,7 +60,7 @@
 
 [최종 보고서](https://docs.google.com/document/d/12iHvaDRjBSHPyicYnQehRhB-txf3G6qH/edit)
 
-[최종 발표자료](https://drive.google.com/file/d/1y6fEvtrbVXvCwEAdjC6Xpt7QiAVqjnDI/view?usp=sharing)
+[최종 발표자료](https://drive.google.com/file/d/1fhDCNlNQ8ymQTq9ktoG-AqXWO8u7vozs/view?usp=sharing)
 
 [apk](https://drive.google.com/file/d/1VwOL1_v03IuEYtuzLoKMuhoDL_J9h_tW/view?usp=sharing)
 
