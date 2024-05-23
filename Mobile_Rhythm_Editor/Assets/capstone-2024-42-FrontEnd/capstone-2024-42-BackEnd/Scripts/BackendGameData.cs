@@ -87,6 +87,8 @@ public class BackendGameData
                         UserDataRowInDate = gameDataJson[0]["inDate"].ToString();
                         userGameData.Json_write(gameDataJson);
 
+                        userGameData.nickname = Backend.UserNickName;
+
                         onGameDataLoadEvent?.Invoke();
 
                         Debug.Log($"유저 정보 데이터 로드 성공");

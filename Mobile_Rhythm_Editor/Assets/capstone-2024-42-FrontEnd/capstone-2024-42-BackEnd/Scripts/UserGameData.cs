@@ -16,6 +16,7 @@ public class UserGameData
     public int userScore;
     public int money;
     public int selectCharacter_num;
+    public int userRank;
 
     public UserGameData()
     {
@@ -32,6 +33,7 @@ public class UserGameData
 
     public Param ToParam()
     {
+        RankRegister rank = new RankRegister();
         Param param = new Param();
         param.Add("Level", level);
         param.Add("Money", money);
@@ -44,10 +46,12 @@ public class UserGameData
 
     public void Json_write(LitJson.JsonData gameDataJson)
     {
+        RankRegister rank = new RankRegister();
         level = int.Parse(gameDataJson[0]["Level"].ToString());
         money = int.Parse(gameDataJson[0]["Money"].ToString());
         userExp = int.Parse(gameDataJson[0]["UserExp"].ToString());
         userScore = int.Parse(gameDataJson[0]["UserScore"].ToString());
         selectCharacter_num = int.Parse(gameDataJson[0]["SelectCharacter"].ToString());
+        userRank = rank.GetMyRankData().rank;
     }
 }
