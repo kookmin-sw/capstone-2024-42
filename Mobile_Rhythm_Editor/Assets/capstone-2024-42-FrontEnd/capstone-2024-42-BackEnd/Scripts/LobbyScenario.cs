@@ -14,6 +14,10 @@ public class LobbyScenario : MonoBehaviour
 
     private void Start()
     {
+        RankRegister.Instance.LoadTopRankData(10);
+
+        RankRegister.Instance.LoadNearbyRankData(5);
+
         BackendGameData.Instance.UserDataLoad();
         
         BackendGameData.Instance.PlayerSongDataLoad();
@@ -23,6 +27,8 @@ public class LobbyScenario : MonoBehaviour
         BackendGameData.Instance.PlayerSongDataSort();
 
         BackendGameData.Instance.PlayerCharacterDataSort();
+
+        
 
         //        BackendGameData.Instance.UserGameData.nickname;
 

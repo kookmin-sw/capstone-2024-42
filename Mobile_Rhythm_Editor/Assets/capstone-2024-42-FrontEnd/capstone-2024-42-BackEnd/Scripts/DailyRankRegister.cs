@@ -15,19 +15,29 @@ public class Rank
 
 public class RankRegister : MonoBehaviour
 {
-    public List<Rank> TopRankList;
-    public List<Rank> NearbyRankList;
+    public List<Rank> topRankList = new List<Rank>();
+    public List<Rank> nearbyRankList = new List<Rank>();
 
-    private void Start()
+    private static RankRegister instance = null;
+    public static RankRegister Instance
     {
-        TopRankList = new List<Rank>();
-        NearbyRankList = new List<Rank>();
+        get
+        {
+            if (instance == null)
+            {
+                instance = new RankRegister();
+            }
+
+            return instance;
+        }
     }
 
-    public List<Rank> GetTopRankData(int num)
+    public List<Rank> TopRankList => topRankList;
+    public List<Rank> NearbyRankList => nearbyRankList;
+
+    public void LoadTopRankData(int num)
     {
-        TopRankList.Clear();
-        List<Rank> rank_list = new List<Rank>();
+        topRankList.Clear();
 
         Backend.URank.User.GetRankList(Constants.USER_RANK_UUID, num, call_back => {
             if (call_back.IsSuccess())
@@ -53,7 +63,7 @@ public class RankRegister : MonoBehaviour
                             rowInRank.score = int.Parse(gameDataJson[i]["score"].ToString());
                             rowInRank.nickname = gameDataJson[i]["nickname"].ToString();
                             rowInRank.gamerInDate = gameDataJson[i]["gamerInDate"].ToString();
-                            TopRankList.Add(rowInRank);
+                            topRankList.Add(rowInRank);
                         }
                     }
                 }
@@ -67,8 +77,6 @@ public class RankRegister : MonoBehaviour
                 Debug.LogError("랭크 불러오기 오류");
             }
         });
-
-        return rank_list;
     }
     public Rank GetMyRankData()
     {
@@ -86,7 +94,7 @@ public class RankRegister : MonoBehaviour
 
     public void LoadNearbyRankData(int num) //num = 주위 몇개의 랭크까지 불러올것인가
     {
-        NearbyRankList.Clear();
+        nearbyRankList.Clear();
         int myRank = GetMyRankData().rank; //내 현재 랭크
         int count = 0;
 
@@ -120,7 +128,7 @@ public class RankRegister : MonoBehaviour
                             rowInRank.score = int.Parse(gameDataJson[i]["score"].ToString());
                             rowInRank.nickname = gameDataJson[i]["nickname"].ToString();
                             rowInRank.gamerInDate = gameDataJson[i]["gamerInDate"].ToString();
-                            NearbyRankList.Add(rowInRank);
+                            nearbyRankList.Add(rowInRank);
                         }
                     }
                 }
