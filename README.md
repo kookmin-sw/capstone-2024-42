@@ -68,6 +68,6 @@
 
 [포스터.pdf](https://drive.google.com/file/d/1VfDWzHIYPdeUWtz2Z0awQhlk0to9Pal7/view?usp=sharing)
 
-[포스터.ai](https://drive.google.com/drive/my-drive?hl=ko-kr)
+[포스터.ai](https://drive.google.com/file/d/1ANSz80myfxw2MZEk_GNtILKd3WhNaNiv/view?usp=sharing)
 
 ![footer](https://capsule-render.vercel.app/api?section=footer)
