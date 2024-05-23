@@ -390,8 +390,6 @@ MonoBehaviour:
   character_image_sprite:
   - {fileID: 21300000, guid: 449d49ba5a5250849b35f06339a9951c, type: 3}
   - {fileID: 21300000, guid: 0830be8904217ff4e80556556fab1b82, type: 3}
-  user_exp_bar: {fileID: 542108887}
-  gauge: {fileID: 1947044203}
 --- !u!1 &264304903
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -630, y: 610}
+  m_AnchoredPosition: {x: -630, y: 595}
   m_SizeDelta: {x: 170, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &472144296

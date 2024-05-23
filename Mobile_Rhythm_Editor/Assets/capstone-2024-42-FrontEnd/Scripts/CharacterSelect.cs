@@ -52,7 +52,7 @@ public class CharacterSelect : MonoBehaviour
 
     public void touch_character_select_button()
     {
-        BackendGameData.Instance.UserGameData.selectCharacter_num = characterId;
+        User.user.character = characterId;
     }
 }
 
