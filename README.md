@@ -15,6 +15,8 @@
 ## 4) 게임 시연
 [<img src="https://img.youtu.be/lGiM4iC_3r4.jpg" width="600" height="300"
 />](https://youtu.be/lGiM4iC_3r4>)
+[<img src="https://img.youtube.com/vi/<VIDEO_ID>/hqdefault.jpg" width="600" height="300"
+/>](https://www.youtube.com/embed/<VIDEO_ID>)
 
 
 ## 5) 기대효과
