@@ -1,6 +1,6 @@
 ![header](https://capsule-render.vercel.app/api?text=SpinTapMasters)
 
-# :man_student: 1.프로젝트 소개 :woman_student:
+# 1.프로젝트 소개
 
 ## 1) 기획 의도
 -RPG처럼 플레이어 캐릭터를 육성하고 PvP, PvE(레이드) 등의 콘텐츠로 다른 유저들과 함께 협동 및 경쟁할 수 있는 Unity 2D 리듬 게임을 개발.
@@ -12,8 +12,9 @@
 ## 3) 개발 목적
 멀티 플레이를 통해 유저들의 경쟁심과 협동심을 부추길 수 있는 리듬 게임을 개발한다. 또한 매력적인 캐릭터와 스토리를 만들어 유저들이 자연스럽게 게임과 캐릭터에 이입하여 흥미와 애정을 가지도록 한다. 이를 통해 유저들이 게임 내에서 타 유저들보다 더 강해지거나, 자신이 원하는 캐릭터를 얻기 위해 유료 가챠, 굿즈 구매 등의 과금 요소에 접근하게끔 유도한다. 공식 게임 홈페이지와 커뮤니티를 통해 클라이언트와 운영진 간의 소통을 원활히 하고 유저들이 게임 IP를 중점으로 서로 소통하도록 하여 게임을 지속적으로 즐기는 코어 유저, 헤비 유저 층들을 형성한다.
 
-## 4) 게임 시연
-<img src="https://youtu.be/AvADLdo8dW0">
+## 4) 시연영상
+
+[![Video Label](http://img.youtube.com/vi/AvADLdo8dW0/0.jpg)](https://youtu.be/AvADLdo8dW0)
 
 ## 5) 기대효과
 1) 게임 내 RPG적 요소와 멀티 플레이라는 타 리듬게임과의 차별성을 통해 시장 내의 독자적 포지션 구축.
@@ -64,3 +65,7 @@
 [apk](https://drive.google.com/file/d/1VwOL1_v03IuEYtuzLoKMuhoDL_J9h_tW/view?usp=sharing)
 
 [포스터.pdf](https://drive.google.com/file/d/1VfDWzHIYPdeUWtz2Z0awQhlk0to9Pal7/view?usp=sharing)
+
+[포스터.ai](https://drive.google.com/drive/my-drive?hl=ko-kr)
+
+![footer](https://capsule-render.vercel.app/api?section=footer)
