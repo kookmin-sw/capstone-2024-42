@@ -1,6 +1,6 @@
 ![header](https://capsule-render.vercel.app/api?text=SpinTapMasters)
 
-# 1.프로젝트 소개
+# 1.프로젝트 소개 
 
 ## 1) 기획 의도
 -RPG처럼 플레이어 캐릭터를 육성하고 PvP, PvE(레이드) 등의 콘텐츠로 다른 유저들과 함께 협동 및 경쟁할 수 있는 Unity 2D 리듬 게임을 개발.
@@ -15,6 +15,8 @@
 ## 4) 시연영상
 
 [![Video Label](http://img.youtube.com/vi/DtKIhjOR1kI/0.jpg)](https://youtu.be/DtKIhjOR1kI)
+
+[![Video Label](http://img.youtube.com/vi/bUpB8MHQ1ys/0.jpg)](https://youtu.be/bUpB8MHQ1ys)
 
 ## 5) 기대효과
 1) 게임 내 RPG적 요소와 멀티 플레이라는 타 리듬게임과의 차별성을 통해 시장 내의 독자적 포지션 구축.
@@ -69,3 +71,4 @@
 [포스터.ai](https://drive.google.com/drive/my-drive?hl=ko-kr)
 
 ![footer](https://capsule-render.vercel.app/api?section=footer)
+
