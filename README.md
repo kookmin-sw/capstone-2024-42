@@ -16,6 +16,8 @@
 
 [![Video Label](http://img.youtube.com/vi/DtKIhjOR1kI/0.jpg)](https://youtu.be/DtKIhjOR1kI)
 
+[![Video Label](http://img.youtube.com/vi/DtKIhjOR1kI/0.jpg)](https://youtu.be/DtKIhjOR1kI)
+
 ## 5) 기대효과
 1) 게임 내 RPG적 요소와 멀티 플레이라는 타 리듬게임과의 차별성을 통해 시장 내의 독자적 포지션 구축.
 2) 2023년 게임 이용자 실태조사에 따르면, 모바일 게임의 이용률이 53.2%로 절반 이상에 달함. 또한 모바일 시장조사 기관 센서타워의 보고서에 따르면 2022년 IP 기반 모바일 게임의 97%가 수익을 창출. 연간 수익 증가 추세 (2018 : 131억 달러 -> 2021 : 203억 달러). 위 통계를 통해 IP 기반 모바일 게임으로서의 수익성을 기대해 볼 수 있음.
@@ -60,7 +62,7 @@
 
 [최종 보고서](https://docs.google.com/document/d/12iHvaDRjBSHPyicYnQehRhB-txf3G6qH/edit)
 
-[최종 발표자료](https://drive.google.com/file/d/1y6fEvtrbVXvCwEAdjC6Xpt7QiAVqjnDI/view?usp=sharing)
+[최종 발표자료](https://drive.google.com/file/d/1fhDCNlNQ8ymQTq9ktoG-AqXWO8u7vozs/view?usp=sharing)
 
 [apk](https://drive.google.com/file/d/1VwOL1_v03IuEYtuzLoKMuhoDL_J9h_tW/view?usp=sharing)
 
