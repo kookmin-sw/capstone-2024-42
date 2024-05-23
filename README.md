@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?text=WelcometoSpinTapMasters)
+![header](https://capsule-render.vercel.app/api?text=SpinTapMasters)
 
 # :man_student: 1.프로젝트 소개 :woman_student:
 
