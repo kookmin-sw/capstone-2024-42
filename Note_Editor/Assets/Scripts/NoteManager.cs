@@ -1,18 +1,100 @@
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using TMPro;
 using System.IO;
 using SFB;
-using TMPro;
-using UnityEngine.Networking; 
 
 public class NoteManager : MonoBehaviour
 {
     public AudioManager audioManager;
+    public RectTransform panelR, panelG, panelY;
     public List<NoteData> notes = new List<NoteData>();
-    public TMP_InputField timeInputField; // TMP 입력 필드에 대한 참조
+    public TMP_InputField timeInputField;
+    private float musicLength;
+    void Update()
+    {
+        musicLength = audioManager.GetClipLength();
+    }
 
+
+
+    public void AddNote(float time, string type, GameObject notePrefab)
+    {
+        RectTransform parentPanel = GetPanelByType(type);
+        if (parentPanel != null && notePrefab != null)
+        {
+            GameObject noteGO = Instantiate(notePrefab, parentPanel);
+            float xPos = ConvertTimeToPositionX(time, parentPanel);
+            float yPos = CalculateNoteYPosition(parentPanel);
+            noteGO.transform.localPosition = new Vector3(xPos, yPos, 0);
+            noteGO.SetActive(true);
+            NoteBehavior noteBehavior = noteGO.GetComponent<NoteBehavior>();
+            if (noteBehavior != null)
+            {
+                noteBehavior.Initialize(this, noteGO, time, type);
+            }
+            NoteData newNote = new NoteData { time = time, type = type, gameObject = noteGO };
+            notes.Add(newNote);
+        }
+    }
+    public float ConvertTimeToPositionX(float time, RectTransform panel)
+    {
+        float panelWidth = panel.rect.width;
+        return (time / musicLength) * panelWidth; // 음악 시작이 패널의 왼쪽 끝에 위치하도록 조정
+    }
+
+    public float ConvertPositionXToTime(float positionX, RectTransform panel)
+    {
+        float panelWidth = panel.rect.width;
+        // x좌표를 패널의 가로 길이에 비례하여 음악 시간으로 변환
+        return (positionX / panelWidth) * musicLength;
+    }
+    private float CalculateNoteYPosition(RectTransform panel) 
+    {
+        // 패널의 높이를 기반으로 노트의 Y 위치를 계산하여 중앙에 배치
+        return -panel.anchoredPosition.y  ;
+    }
+
+    
+
+    RectTransform GetPanelByType(string type)
+    {
+        return type switch
+        {
+            "Note_R" => panelR,
+            "Note_G" => panelG,
+            "Note_Y" => panelY,
+            _ => null,
+        };
+    }
+
+    public void UpdateNoteTime(GameObject note, float oldTime, float newTime)
+    {
+        NoteBehavior noteBehavior = note.GetComponent<NoteBehavior>();
+        if (noteBehavior != null)
+        {
+            NoteData noteData = notes.Find(n => n.gameObject == note && Mathf.Approximately(n.time, oldTime));
+            if (noteData != null)
+            {
+                noteData.time = newTime; // 노트 시간 업데이트
+                noteBehavior.noteTime = newTime; // 노트 컴포넌트 내 시간도 업데이트
+                note.transform.localPosition = new Vector3(ConvertTimeToPositionX(newTime, GetPanelByType(noteBehavior.noteType)), note.transform.localPosition.y, 0);
+            }
+        }   
+    }
+
+    public void DeleteNote(NoteBehavior noteBehavior)
+    {
+        NoteData noteData = notes.Find(n => n.gameObject == noteBehavior.gameObject);
+        if (noteData != null)
+        {
+            notes.Remove(noteData); // 노트 데이터 삭제
+            Destroy(noteBehavior.gameObject); // 게임 오브젝트 삭제
+        }
+    }
+    
     public void SaveNotes()
     {
         var path = StandaloneFileBrowser.SaveFilePanel("Save Notes", "", "notes", "json");
@@ -22,6 +104,7 @@ public class NoteManager : MonoBehaviour
             File.WriteAllText(path, json);
         }
     }
+
     public void LoadNotes()
     {
         var paths = StandaloneFileBrowser.OpenFilePanel("Load Notes", "", "json", false);
@@ -40,60 +123,50 @@ public class NoteManager : MonoBehaviour
         if (string.IsNullOrEmpty(filePath))
         {
             Debug.LogError("File path is empty.");
-            yield break; // 코루틴을 여기서 종료
+            yield break; 
         }
 
-        // 로컬 파일 시스템에서 파일 읽기
         string jsonData = File.ReadAllText(filePath);
-
         NoteDataWrapper loadedData = JsonUtility.FromJson<NoteDataWrapper>(jsonData);
-
-        float lastNoteTime = 0f;
-        // 로드된 노트 데이터를 notes 리스트에 추가
         foreach (NoteData noteData in loadedData.Notes)
         {
-            notes.Add(new NoteData(noteData.time, noteData.type, noteData.position, noteData.direction));
-            lastNoteTime = Mathf.Max(lastNoteTime, noteData.time); 
+            AddNote(noteData.time, noteData.type, noteData.gameObject);
         }
-        audioManager.SetMusicTime(lastNoteTime);
         yield return null;
     }
+
     public void DeleteNotesButtonPressed()
     {
         if (float.TryParse(timeInputField.text, out float seconds))
         {
-            float currentTime = audioManager.GetMusicTime(); // 현재 음악 시간을 가져옵니다.
-            float newTime = Mathf.Max(0, currentTime - seconds); // 음악 시간에서 입력된 시간을 빼서 새로운 시간을 계산합니다.
-
-            // 음악의 재생 위치를 새로운 시간으로 설정합니다.
-            audioManager.SetMusicTime(newTime);
-
-            // 새로운 시간과 현재 시간 사이에 생성된 노트들을 삭제합니다.
-            notes.RemoveAll(note => note.time >= newTime && note.time <= currentTime);
+            RewindAndDeleteNotes(seconds);
         }
         else
         {
             Debug.LogError("Invalid input. Please enter a valid number.");
         }
     }
-    // 시간 입력에 따라 음악을 되감고, 해당 시간 동안 생성된 노트들을 삭제
+
+    
     public void RewindAndDeleteNotes(float seconds)
     {
-        audioManager.RewindMusicBy(seconds); // 음악 되감기
+        float currentTime = audioManager.GetMusicTime();
+        float newTime = Mathf.Max(0, currentTime - seconds);
+        audioManager.SetMusicTime(newTime);
+        List<NoteData> notesToRemove = notes.FindAll(note => note.time >= newTime && note.time <= currentTime);
+        foreach (NoteData note in notesToRemove)
+        {
+            if (note.gameObject != null) // 해당 노트의 게임 오브젝트가 존재하는지 확인
+            {
+                Destroy(note.gameObject); // 게임 오브젝트 삭제
+            }
+        }
+        notes.RemoveAll(note => note.time >= newTime && note.time <= currentTime);
+    }
 
-        float currentTime = audioManager.GetMusicTime(); // 현재 음악 시간 가져오기
-        notes.RemoveAll(note => note.time >= currentTime); // 현재 시간 이후에 생성된 노트들 삭제
-    }
-   
-    // 방향 정보를 포함하여 노트를 추가하는 메서드
-    public void AddNote(float time, string type, Vector3 position, Vector3 direction)
-    {
-        notes.Add(new NoteData(time, type, position, direction));
-    }
-    
     [System.Serializable]
     public class NoteDataWrapper
     {
-        public List<NoteData> Notes;
+        public List<NoteData> Notes = new List<NoteData>();
     }
 }

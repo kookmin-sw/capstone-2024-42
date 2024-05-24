@@ -186,10 +186,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: "\uACC4\uC815 \uB4F1\uB85D"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5847e9c371ea4fb4281e74f49edbe0f2, type: 2}
-  m_sharedMaterial: {fileID: 6552398467732431668, guid: 5847e9c371ea4fb4281e74f49edbe0f2, type: 2}
+  m_sharedMaterial: {fileID: 8350186413457244308, guid: 5847e9c371ea4fb4281e74f49edbe0f2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

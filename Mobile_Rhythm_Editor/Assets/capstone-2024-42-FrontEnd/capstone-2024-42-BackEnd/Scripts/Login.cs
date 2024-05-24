@@ -39,9 +39,15 @@ public class Login : LoginBase
 
             if(callback.IsSuccess())
             {
-                SetMessage($"{inputFieldID.text}님 환영합니다.");
+//                string googlehash = Backend.Utils.GetGoogleHash();
 
-                Utils.LoadScene(SceneNames.LobbyScene);
+                SetMessage($"{Backend.UserNickName}님 환영합니다.");
+
+                BackendChartData.LoadAllChart();
+
+//                Debug.Log("구글 해시 키 : " + googlehash);
+
+                Utils.LoadScene(SceneNames.LoadingScene);
             }
             else
             {

@@ -1,0 +1,14 @@
+*.csproj
+*.sln
+.vscode/
+Library/
+Logs/
+UserSettings/
+Packages/
+ProjectSettings/
+*.blob
+*.so
+*.json
+*.x86_64
+*.Data/
+.utmp/

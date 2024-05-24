@@ -24,16 +24,24 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("Game_Scene");
     }
-    public void Change_Ingame()
+
+    public void Change_User_Information_Scene()
+    {
+        SceneManager.LoadScene("User_Information_Scene");
+    }
+
+    public void Change_Shop_Scene()
+    {
+        SceneManager.LoadScene("Shop_Scene");
+    }
+
+    public void Change_Ranking_Scene()
+    {
+        SceneManager.LoadScene("Ranking_Scene");
+    }
+
+    public void Change_Ingame_Scene()
     {
         SceneManager.LoadScene("Ingame");
-    }
-    public void Change_Start_Scene()
-    {
-        SceneManager.LoadScene("Start_Scene");
-    }
-    public void Change_logo_Scene()
-    {
-        SceneManager.LoadScene("LogoScene");
     }
 }

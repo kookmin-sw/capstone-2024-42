@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using BackEnd;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class RegisterAccount : LoginBase
 {
@@ -22,6 +23,10 @@ public class RegisterAccount : LoginBase
     private Image imageEmail;
     [SerializeField]
     private TMP_InputField inputFieldEmail;
+    [SerializeField]
+    private Image imageNickname;
+    [SerializeField]
+    private TMP_InputField inputFieldNickname;
 
     [SerializeField]
     private Button btnRegisterAccount;
@@ -34,6 +39,7 @@ public class RegisterAccount : LoginBase
         if (IsFieldDataEmpty(imagePW, inputFieldPW.text, "비밀번호")) return;
         if (IsFieldDataEmpty(imageConfirmPW, inputFieldConfirmPW.text, "비밀번호 확인")) return;
         if (IsFieldDataEmpty(imageEmail, inputFieldEmail.text, "메일 주소")) return;
+        if (IsFieldDataEmpty(imageNickname, inputFieldEmail.text, "닉네임")) return;
 
         if(!inputFieldPW.text.Equals(inputFieldConfirmPW.text))
         {
@@ -65,7 +71,19 @@ public class RegisterAccount : LoginBase
                 {
                     if(callback.IsSuccess())
                     {
-                        SetMessage($"계정 생성 성공. {inputFieldID.text}님 환영합니다.");
+                        Backend.BMember.CreateNickname(inputFieldNickname.text, callback =>
+                        {
+                            if (callback.IsSuccess())
+                            {
+                                BackendGameData.Instance.UserDataInsert();
+
+                                SetMessage($"계정 생성 성공. {inputFieldNickname.text}님 환영합니다.");
+
+                                BackendGameData.Instance.PlayerSongDataInsert();
+
+                                BackendGameData.Instance.PlayerCharacterDataInsert();
+                            }
+                        });
                     }
                 });
             }
@@ -97,7 +115,4 @@ public class RegisterAccount : LoginBase
             }
         });
     }
-
-
-
 }

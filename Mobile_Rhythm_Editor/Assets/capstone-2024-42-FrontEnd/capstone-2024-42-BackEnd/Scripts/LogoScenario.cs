@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LogoScenario : MonoBehaviour
+public class SceneScenario : MonoBehaviour
 {
     [SerializeField]
     private Progress progress;

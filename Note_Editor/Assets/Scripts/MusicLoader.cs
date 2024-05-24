@@ -6,6 +6,8 @@ using SFB; // StandaloneFileBrowser 사용
 [RequireComponent(typeof(AudioSource))]
 public class MusicLoader : MonoBehaviour
 {
+    public delegate void MusicLoadedHandler(AudioClip loadedClip);
+    public event MusicLoadedHandler OnMusicLoaded; // 음악 로드 완료 이벤트
     private AudioSource audioSource;
 
     void Awake()
@@ -41,6 +43,10 @@ public class MusicLoader : MonoBehaviour
             {
                 AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
                 audioSource.clip = clip;
+                audioSource.Play(); // 자동으로 재생 시작
+
+                // 음악 로드 완료 이벤트 호출
+                OnMusicLoaded?.Invoke(clip);
             }
         }
     }
