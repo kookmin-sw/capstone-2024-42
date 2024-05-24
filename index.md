@@ -1,6 +1,6 @@
 ![header](https://capsule-render.vercel.app/api?text=SpinTapMasters)
 
-# 1.프로젝트 소개
+# 👨‍🎓 1.프로젝트 소개 👩‍🎓
 
 ## 1) 기획 의도
 -RPG처럼 플레이어 캐릭터를 육성하고 PvP, PvE(레이드) 등의 콘텐츠로 다른 유저들과 함께 협동 및 경쟁할 수 있는 Unity 2D 리듬 게임을 개발.
