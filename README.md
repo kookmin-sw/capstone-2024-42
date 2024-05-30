@@ -95,7 +95,7 @@ Game
 
 [최종 발표자료](https://drive.google.com/file/d/1fhDCNlNQ8ymQTq9ktoG-AqXWO8u7vozs/view?usp=sharing)
 
-[apk](https://drive.google.com/file/d/1VwOL1_v03IuEYtuzLoKMuhoDL_J9h_tW/view?usp=sharing)
+[apk](https://drive.google.com/file/d/14VWbKJ4hrsf4afdegNhwRDBsdW7ztNMe/view)
 
 [포스터.pdf](https://drive.google.com/file/d/1VfDWzHIYPdeUWtz2Z0awQhlk0to9Pal7/view?usp=sharing)
 
